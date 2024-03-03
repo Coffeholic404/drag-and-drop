@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Column } from "./Column";
 import Default_Cards from "../../CardsData";
+import { DeleteSection } from "./DeleteSection";
 
 export const Board = () => {
     const [cards, setCards] = useState(Default_Cards);
@@ -33,5 +34,6 @@ export const Board = () => {
         cards={cards}
         setCards={setCards}
       />
+      <DeleteSection setCards={setCards}/>
     </div>
 }
