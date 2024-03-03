@@ -6,6 +6,9 @@ import { AddCard } from "./AddCard";
 export const Column = ({title, headingColor, column, cards, setCards}) => {
     const [active, setActive] = useState(false);
     const filterCards = cards.filter((c) => c.column === column);
+    const handleDragStart = (e, card) => {
+        e.dataTransfer.setData("cardId", card.id);
+    }
     return (<div className=" w-56 shrink-0">
         <div className=" mb-3 flex items-center justify-between">
             <h3 className={`font-medium ${headingColor}`}>
@@ -17,7 +20,9 @@ export const Column = ({title, headingColor, column, cards, setCards}) => {
             active ? "bg-neutral-800/50" : "bg-neutral-800/0"
         }`}> 
         {filterCards.map((c) => {
-            return <Card key={c.id} {...c} />
+            return <Card key={c.id} {...c} 
+            handleDragStart={handleDragStart}
+            />
         })}
         <DropIndicator beforeId="-1" column={column}/>
         <AddCard column={column} setCards={setCards}/>
