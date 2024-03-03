@@ -17,15 +17,56 @@ export const Column = ({
   }
   const handleDragOver = (e) => {
     e.preventDefault()
+    highlightIndicator(e);
     setActive(true)
   }
 
+  const highlightIndicator = (e) => {
+    const indicators = getIndicators();
+    clearHighlights(indicators);
+    const el = getNearstIndicator(e, indicators);
+    el.element.style.opacity = "1";
+  };
+
+  const getIndicators = () => {
+    return Array.from(document.querySelectorAll(`[data-column="${column}"]`))
+  };
+
+  const getNearstIndicator = (e, indicators) => {
+    const DISTANCE_OFFSET = 50;
+    const el = indicators.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = e.clientY - (box.top + DISTANCE_OFFSET);
+
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child};
+        } else {
+            return closest
+        }
+    },
+    {
+        offset: Number.NEGATIVE_INFINITY,
+        element: indicators[indicators.length - 1],
+    }
+    );
+    return el;
+  }
+
+  const clearHighlights = (els) => {
+    const indicators = els || getIndicators();
+
+    indicators.forEach((i) => {
+        i.style.opacity = "0";
+    })
+  }
   const handleDragLeave = () => {
     setActive(false);
+    clearHighlights();
   };
 
   const handleDragEnd = () => {
     setActive(false)
+    clearHighlights();
   }
   return (
     <div className=" w-56 shrink-0">
