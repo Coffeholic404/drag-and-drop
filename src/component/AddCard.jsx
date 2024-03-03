@@ -2,21 +2,21 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
 import { FiPlus } from 'react-icons/fi'
-import { motion } from "framer-motion"
+import { motion } from 'framer-motion'
 export const AddCard = ({ column, setCards }) => {
   const [text, setText] = useState('')
   const [adding, setAdding] = useState(false)
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if(!text.trim().length) return;
-        const newCard = {
-            column,
-            title: text.trim(),
-            id: Math.random().toString(),
-        };
-        setCards((pv) => [...pv, newCard]);
-        setAdding(false);
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!text.trim().length) return
+    const newCard = {
+      column,
+      title: text.trim(),
+      id: Math.random().toString(),
     }
+    setCards((pv) => [...pv, newCard])
+    setAdding(false)
+  }
   return (
     <>
       {adding ? (
@@ -45,7 +45,7 @@ export const AddCard = ({ column, setCards }) => {
         </motion.form>
       ) : (
         <motion.button
-        layout
+          layout
           onClick={() => setAdding(true)}
           className="flex w-full items-center gap-1.5 px-3 py-1.5 text-sm text-neutral-400 transition-colors hover:text-neutral-50"
         >
