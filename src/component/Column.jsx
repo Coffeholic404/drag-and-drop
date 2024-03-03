@@ -84,12 +84,14 @@ export const Column = ({
 
       copy = copy.filter((c) => c.id !== cardId);
 
-      const moveToBack = before === "-1";
-      if(moveToBack) {
+      const moveToBack = before === '-1';
+      if (moveToBack) {
         copy.push(cardToTransfer);
       } else {
-        const insertAtIndex = copy.findIndex((el) => el.id === before);
-        if(insertAtIndex === undefined) return;
+        const insertAtIndex = copy.findIndex(
+          (el) => el.id === before,
+        );
+        if (insertAtIndex === undefined) return;
 
         copy.splice(insertAtIndex, 0, cardToTransfer);
       }

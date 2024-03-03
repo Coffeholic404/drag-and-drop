@@ -1,22 +1,22 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
-import { FiPlus } from 'react-icons/fi'
-import { motion } from 'framer-motion'
+import { useState } from 'react';
+import { FiPlus } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 export const AddCard = ({ column, setCards }) => {
-  const [text, setText] = useState('')
-  const [adding, setAdding] = useState(false)
+  const [text, setText] = useState('');
+  const [adding, setAdding] = useState(false);
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!text.trim().length) return
+    e.preventDefault();
+    if (!text.trim().length) return;
     const newCard = {
       column,
       title: text.trim(),
       id: Math.random().toString(),
-    }
-    setCards((pv) => [...pv, newCard])
-    setAdding(false)
-  }
+    };
+    setCards((pv) => [...pv, newCard]);
+    setAdding(false);
+  };
   return (
     <>
       {adding ? (
@@ -54,5 +54,5 @@ export const AddCard = ({ column, setCards }) => {
         </motion.button>
       )}
     </>
-  )
-}
+  );
+};

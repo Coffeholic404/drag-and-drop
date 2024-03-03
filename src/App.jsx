@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Board } from './component/Board'
 // import './App.css'
 

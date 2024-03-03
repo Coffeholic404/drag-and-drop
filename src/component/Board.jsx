@@ -1,19 +1,32 @@
-import { useState } from "react"
-import { Column } from "./Column";
-import Default_Cards from "../../CardsData";
-import { DeleteSection } from "./DeleteSection";
+import { useEffect, useState } from 'react';
+import { Column } from './Column';
+// import Default_Cards from '../../CardsData';
+import { DeleteSection } from './DeleteSection';
 
 export const Board = () => {
-    const [cards, setCards] = useState(Default_Cards);
-    return <div className="flex h-full w-full gap-3 overflow-scroll p-12">
-        <Column 
+  const [cards, setCards] = useState([]);
+  const [hasChecked, setHasChecked] = useState(false);
+
+  useEffect(() => {
+    hasChecked &&
+      localStorage.setItem('cards', JSON.stringify(cards));
+  }, [cards]);
+  useEffect(() => {
+    const cardData = localStorage.getItem('cards');
+
+    setCards(cardData ? JSON.parse(cardData) : []);
+    setHasChecked(true);
+  }, []);
+  return (
+    <div className="flex h-full w-full gap-3 overflow-scroll p-12">
+      <Column
         title="Backlog"
         column="backlog"
         headingColor="text-neutral-500"
         cards={cards}
         setCards={setCards}
-        />
-        <Column
+      />
+      <Column
         title="TODO"
         column="todo"
         headingColor="text-yellow-200"
@@ -34,6 +47,7 @@ export const Board = () => {
         cards={cards}
         setCards={setCards}
       />
-      <DeleteSection setCards={setCards}/>
+      <DeleteSection setCards={setCards} />
     </div>
-}
+  );
+};

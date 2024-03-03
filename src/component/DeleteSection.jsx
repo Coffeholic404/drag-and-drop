@@ -1,23 +1,23 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
-import { FaFire } from 'react-icons/fa'
-import { FaTrash } from 'react-icons/fa'
+import { useState } from 'react';
+import { FaFire } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 
 export const DeleteSection = ({ setCards }) => {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
   const handledDragOver = (e) => {
-    e.preventDefault()
-    setActive(true)
-  }
+    e.preventDefault();
+    setActive(true);
+  };
   const handleDragLeave = () => {
-    setActive(false)
-  }
+    setActive(false);
+  };
 
   const handleDragEnd = (e) => {
-    const cardId = e.dataTransfer.getData("cardId");
+    const cardId = e.dataTransfer.getData('cardId');
     setCards((pv) => pv.filter((c) => c.id !== cardId));
     setActive(false);
-  }
+  };
   return (
     <div
       onDragOver={handledDragOver}
@@ -31,5 +31,5 @@ export const DeleteSection = ({ setCards }) => {
     >
       {active ? <FaFire className="animate-bounce" /> : <FaTrash />}
     </div>
-  )
-}
+  );
+};
