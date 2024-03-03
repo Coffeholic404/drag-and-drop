@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react"
-
+import { Card } from "./Card";
+import { DropIndicator } from "./DropIndicator";
 export const Column = ({title, headingColor, column, cards, setCards}) => {
     const [active, setActive] = useState(false);
     const filterCards = cards.filter((c) => c.column === column);
@@ -15,8 +16,9 @@ export const Column = ({title, headingColor, column, cards, setCards}) => {
             active ? "bg-neutral-800/50" : "bg-neutral-800/0"
         }`}> 
         {filterCards.map((c) => {
-            return <Card key={c.id} {...c} />;
+            return <Card key={c.id} {...c} />
         })}
+        <DropIndicator beforeId="-1" column={column}/>
         </div>
 
         </div>
