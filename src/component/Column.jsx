@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Card } from "./Card";
 import { DropIndicator } from "./DropIndicator";
+import { AddCard } from "./AddCard";
 export const Column = ({title, headingColor, column, cards, setCards}) => {
     const [active, setActive] = useState(false);
     const filterCards = cards.filter((c) => c.column === column);
@@ -19,6 +20,7 @@ export const Column = ({title, headingColor, column, cards, setCards}) => {
             return <Card key={c.id} {...c} />
         })}
         <DropIndicator beforeId="-1" column={column}/>
+        <AddCard column={column} setCards={setCards}/>
         </div>
 
         </div>
