@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { Column } from "./Column";
+import Default_Cards from "../../CardsData";
 
 export const Board = () => {
-    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState(Default_Cards);
     return <div className="flex h-full w-full gap-3 overflow-scroll p-12">
         <Column 
         title="Backlog"
